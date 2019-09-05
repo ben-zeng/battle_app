@@ -28,8 +28,23 @@ class Battle < Sinatra::Base
 
   get '/attack' do
     @game = $game
-    @game.attack(@game.player_2)
+    @prev_turn_name = @game.prev_turn.name
+    @game.attack(@game.prev_turn)
+    @prev_turn_hp = @game.prev_turn.hit_points
+    @game.switch_turns
+    if @game.player_won? == nil
+      erb(:attack)
+    else
+      redirect '/end'
+    end
+    #@game.player_won? == nil ? erb(:attack) : redirect '/play'
     erb(:attack)
+  end
+
+  get '/end' do
+    @game = $game
+    @winner = @game.player_won?.name
+    erb(:end)
   end
 
   run! if app_file == $0

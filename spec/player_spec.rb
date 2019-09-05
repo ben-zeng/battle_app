@@ -16,5 +16,11 @@ describe Player do
     end
   end
 
+  describe '#dead?' do
+    it 'returns true if player is dead' do
+      10.times{ bob.reduce_hp }
+      expect(bob.dead?).to eq true
+    end
+  end
 
 end

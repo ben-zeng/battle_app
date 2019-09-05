@@ -1,2 +1,5 @@
-<h1><%= @game.player_2.name %> has been attacked </h1>
-<h2><%= @game.player_2.name %>: <%= @game.player_2.hit_points %> HP </h2>
+<h1><%= @prev_turn_name %> has been attacked </h1>
+<h2><%= @prev_turn_name %>: <%= @prev_turn_hp %> HP </h2>
+<form action="/play">
+  <input type="submit" value="Next turn">
+</form>
