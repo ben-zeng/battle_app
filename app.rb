@@ -5,6 +5,10 @@ require './lib/game'
 class Battle < Sinatra::Base
   enable :sessions
 
+  before do
+    @game = Game.the_game
+  end
+
   get '/' do
     erb(:index)
   end
@@ -12,7 +16,7 @@ class Battle < Sinatra::Base
   post '/names' do
     player_1 = Player.new(params[:player_1])
     player_2 = Player.new(params[:player_2])
-    $game = Game.new(player_1, player_2)
+    @game = Game.create(player_1, player_2)
 
     redirect '/play'
   end
@@ -22,12 +26,12 @@ class Battle < Sinatra::Base
   end
 
   get '/play' do
-    @game = $game
+    #@game = Game.the_game
     erb(:play)
   end
 
   get '/attack' do
-    @game = $game
+    #@game = Game.the_game
     @prev_turn_name = @game.prev_turn.name
     @game.attack(@game.prev_turn)
     @prev_turn_hp = @game.prev_turn.hit_points
@@ -42,7 +46,7 @@ class Battle < Sinatra::Base
   end
 
   get '/end' do
-    @game = $game
+    #@game = Game.the_game
     @winner = @game.player_won?.name
     erb(:end)
   end

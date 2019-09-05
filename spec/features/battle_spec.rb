@@ -51,7 +51,7 @@ feature 'battle_spec tests' do
       sign_in_and_play
       click_button 'Attack'
       click_button 'Next turn'
-      expect($game.current_turn.name).to eq 'Marley'
+      expect(Game.the_game.current_turn.name).to eq 'Marley'
       expect(page).to have_content 'Bob vs Marley!!'
     end
   end
