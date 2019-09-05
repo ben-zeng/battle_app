@@ -1,7 +1,7 @@
 class Game
 attr_reader :player_1, :player_2, :current_turn, :prev_turn
 
-@
+
 
   def initialize(player_1 , player_2)
     @player_1 = player_1
